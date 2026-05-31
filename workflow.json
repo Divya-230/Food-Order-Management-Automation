@@ -1,0 +1,187 @@
+{
+  "name": "workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1Bj8ovWyGjYi6Ih1Tq4dI9CSFuFIoA13x6MDYfEwNVK8",
+          "mode": "list",
+          "cachedResultName": "Untitled spreadsheet",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Bj8ovWyGjYi6Ih1Tq4dI9CSFuFIoA13x6MDYfEwNVK8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Bj8ovWyGjYi6Ih1Tq4dI9CSFuFIoA13x6MDYfEwNVK8/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "CustomerName": "Divya",
+            "FoodItem": "Burger Combo",
+            "Amount": "290",
+            "Quantity": "1"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "CustomerName",
+              "displayName": "CustomerName",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "FoodItem",
+              "displayName": "FoodItem",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Quantity",
+              "displayName": "Quantity",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Amount",
+              "displayName": "Amount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        528,
+        0
+      ],
+      "id": "c3032031-bacb-477d-8738-72c83e182579",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "uwkUqWxucdb51G8A",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "formTitle": "Food Order Form",
+        "formDescription": "Place your food order below.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "CustomerName"
+            },
+            {
+              "fieldLabel": "FoodItem"
+            },
+            {
+              "fieldLabel": "Quantity",
+              "fieldType": "number"
+            },
+            {
+              "fieldLabel": "Amount",
+              "fieldType": "number"
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        208,
+        0
+      ],
+      "id": "a098d13b-821f-4411-bd5d-823135a46666",
+      "name": "On form submission",
+      "webhookId": "acb5b32e-f745-4fe1-9079-cd5ef9e99a91"
+    },
+    {
+      "parameters": {
+        "sendTo": "=adigoppuladivya23@gmail.com",
+        "subject": "=Order Confirmation",
+        "message": "=Hello Divya,\nYour order for Burger Combo has been received.",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        736,
+        0
+      ],
+      "id": "fe1a3dc8-0fd9-434c-8fdc-eaf4982a7c9b",
+      "name": "Send a message",
+      "webhookId": "67723282-1234-4a14-85cc-44b78b4ebe83",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "iY2KPGDmtAGq5RQQ",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "df9becc2-29b6-46c2-a227-1b1e76b1fd0e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "241751c2cb64370774debf146382848c3b7c296a94ccc6964e4ade2186f2259a"
+  },
+  "id": "M5DgiL1ypo8VI4aD",
+  "tags": []
+}
